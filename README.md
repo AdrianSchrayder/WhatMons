@@ -1,5 +1,5 @@
 # WhatMons
-Code for my PetMod
+Code for my PetMod which is designed by me to be whatever I want it to be which means buffing random mons as I see fit although not always directly through changes in that mon itself. More than welcome to take suggestions if you find a way to do that.
 
 # Pokedex Changes
 Buffed some mons explicitly, but many received buffs through move improvements and ability changes even though nothing about the mon itself was changed.
