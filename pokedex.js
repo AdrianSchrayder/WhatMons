@@ -4,7 +4,7 @@ exports.BattlePokedex = {
 	
 	venusaur: {
 		inherit: true,
-		baseStats: {hp:80, atk:62, def:93, spa: 110, spd 110, spe:80},
+		baseStats: {hp:80, atk:62, def:93, spa: 110, spd: 110, spe:80},
 		abilities: {0: "Overgrow", H: "Thick Fat"},
 	},
 	charizard: {
@@ -16,6 +16,10 @@ exports.BattlePokedex = {
 		inherit: true,
 		baseStats: {hp: 79, atk: 60, def: 105, spa:108, spd: 110, spe:78},
 		abilities: {0: "Torrent", H:"Mega Launcher"},
+	},
+	poliwrath: {
+		inherit: true,
+		baseStats: {hp: 90, atk: 105, def: 95, spa: 105, spd: 90, spe: 80},
 	},
 	hypno: {
 		num: 97,
@@ -44,9 +48,13 @@ exports.BattlePokedex = {
 		evoMove: "Mimic",
 		eggGroups: ["Human-Like"],
 	},
+	lapras: {
+		inherit: true,
+		baseStats: {hp: 140, atk: 85, def: 100, spa: 90, spd: 100, spe: 60},
+	},
 	articuno: {
 		inherit: true,
-		baseStats: {hp: 100, atk: 115, def: 100, spa: 60, spd:125, spe: 100}, 
+		baseStats: {hp: 100, atk: 115, def: 100, spa: 60, spd: 125, spe: 100}, 
 		abilities: {0: "Pressure", H: "Snow Warning"},
 	},
 	zapdos: {
