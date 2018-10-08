@@ -65,6 +65,56 @@ exports.BattleMovedex = {
 		zMovePower: 250,
 		contestType: "Beautiful",
 	},
+	"brine": {
+		num: 362,
+		accuracy: 100,
+		basePower: 75,
+		category: "Special",
+		desc: "Power doubles if the target has less than or equal to half of its maximum HP remaining.",
+		shortDesc: "Power doubles if the target's HP is 50% or less.",
+		id: "brine",
+		name: "Brine",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		onBasePowerPriority: 4,
+		onBasePower: function (basePower, pokemon, target) {
+			if (target.hp * 2 <= target.maxhp) {
+				return this.chainModify(2);
+			}
+		},
+		secondary: null,
+		target: "normal",
+		type: "Water",
+		zMovePower: 120,
+		contestType: "Tough",
+	},
+	"brutalswing": {
+		num: 693,
+		accuracy: true,
+		basePower: 80,
+		category: "Physical",
+		desc: "No additional effect.",
+		shortDesc: "No additional effect. Hits adjacent Pokemon.",
+		id: "brutalswing",
+		name: "Brutal Swing",
+		pp: 20,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1},
+		onTryHit: function (pokemon) {
+			// will shatter screens through sub, before you hit
+			if (pokemon.runImmunity('Fighting')) {
+				pokemon.side.removeSideCondition('reflect');
+				pokemon.side.removeSideCondition('lightscreen');
+				pokemon.side.removeSideCondition('auroraveil');
+			}
+		},
+		secondary: null,
+		target: "allAdjacent",
+		type: "Dark",
+		zMovePower: 120,
+		contestType: "Tough",
+	},
 	"fireblast": {
 		num: 126,
 		accuracy: 85,
@@ -135,6 +185,88 @@ exports.BattleMovedex = {
 		type: "Water",
 		zMovePower: 250,
 		contestType: "Beautiful",
+	},
+	"mysticalfire": {
+		num: 595,
+		accuracy: 100,
+		basePower: 95,
+		category: "Special",
+		desc: "Has a 100% chance to lower the target's Special Attack by 1 stage.",
+		shortDesc: "100% chance to lower the target's Sp. Atk by 1.",
+		id: "mysticalfire",
+		name: "Mystical Fire",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		secondary: {
+			chance: 100,
+			boosts: {
+				spa: -1,
+				atk: -1,
+			},
+		},
+		target: "normal",
+		type: "Fire",
+		zMovePower: 180,
+		contestType: "Beautiful",
+	},
+	"spikyshield": {
+		num: 596,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		desc: "The user is protected from most attacks made by other Pokemon during this turn, and Pokemon making contact with the user lose 1/8 of their maximum HP, rounded down. This move has a 1/X chance of being successful, where X starts at 1 and triples each time this move is successfully used. X resets to 1 if this move fails, if the user's last move used is not Baneful Bunker, Detect, Endure, King's Shield, Protect, Quick Guard, Spiky Shield, or Wide Guard, or if it was one of those moves and the user's protection was broken. Fails if the user moves last this turn.",
+		shortDesc: "Protects from moves. Contact: loses 1/8 max HP.",
+		id: "spikyshield",
+		isViable: true,
+		name: "Spiky Shield",
+		pp: 10,
+		priority: 4,
+		flags: {},
+		stallingMove: true,
+		volatileStatus: 'spikyshield',
+		onTryHit: function (target, source, move) {
+			return !!this.willAct() && this.runEvent('StallMove', target);
+		},
+		onHit: function (pokemon) {
+			pokemon.addVolatile('stall');
+		},
+		effect: {
+			duration: 1,
+			onStart: function (target) {
+				this.add('-singleturn', target, 'move: Protect');
+			},
+			onTryHitPriority: 3,
+			onTryHit: function (target, source, move) {
+				if (!move.flags['protect']) {
+					if (move.isZ) move.zBrokeProtect = true;
+					return;
+				}
+				this.add('-activate', target, 'move: Protect');
+				source.moveThisTurnResult = true;
+				let lockedmove = source.getVolatile('lockedmove');
+				if (lockedmove) {
+					// Outrage counter is reset
+					if (source.volatiles['lockedmove'].duration === 2) {
+						delete source.volatiles['lockedmove'];
+					}
+				}
+				if (move.flags['contact']) {
+					this.damage(source.maxhp / 4, source, target);
+				}
+				return null;
+			},
+			onHit: function (target, source, move) {
+				if (move.zPowered && move.flags['contact']) {
+					this.damage(source.maxhp / 4, source, target);
+				}
+			},
+		},
+		secondary: null,
+		target: "self",
+		type: "Grass",
+		zMoveBoost: {def: 1},
+		contestType: "Tough",
 	},
 	"stealthrock": {
 		num: 446,
