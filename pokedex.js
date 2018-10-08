@@ -9,6 +9,7 @@ exports.BattlePokedex = {
 	},
 	charizard: {
 		inherit: true,
+		types: ["Fire", "Dragon", "caw"],
 		baseStats: {hp: 78, atk: 74, def:80, spa:114, spd: 88, spe:110},
 		abilities: {0: "Blaze", H: "Drought"},
 	},
@@ -16,6 +17,11 @@ exports.BattlePokedex = {
 		inherit: true,
 		baseStats: {hp: 79, atk: 60, def: 105, spa:108, spd: 110, spe:78},
 		abilities: {0: "Torrent", H:"Mega Launcher"},
+	},
+	venomoth :{
+		inherit: true,
+		types: ["Bug", "Poison", "caw"],
+		baseStats: {hp: 80, atk: 75, def: 70, spa: 100, spd: 85, spe: 100},
 	},
 	poliwrath: {
 		inherit: true,
@@ -33,6 +39,10 @@ exports.BattlePokedex = {
 		prevo: "drowzee",
 		evoLevel: 26,
 		eggGroups: ["Human-Like"],
+	},
+	gengar: {
+		inherit: true,
+		types: ["Ghost", "Poison", "caw"],
 	},
 	mrmime: {
 		num: 122,
@@ -70,7 +80,7 @@ exports.BattlePokedex = {
 	meganium: {
 		num: 154,
 		species: "Meganium",
-		types: ["Grass"],
+		types: ["Grass", "Fairy"],
 		genderRatio: {M: 0.875, F: 0.125},
 		baseStats: {hp: 80, atk: 93, def: 110, spa: 62, spd: 110, spe: 80},
 		abilities: {0: "Overgrow", H: "Simple"},
@@ -123,7 +133,7 @@ exports.BattlePokedex = {
 	sceptile: {
 		num: 254,
 		species: "Sceptile",
-		types: ["Grass"],
+		types: ["Grass", "Dragon"],
 		genderRatio: {M: 0.875, F: 0.125},
 		baseStats: {hp: 70, atk: 85, def: 65, spa: 105, spd: 85, spe: 120},
 		abilities: {0: "Overgrow", H: "Competitive"},
@@ -190,6 +200,11 @@ exports.BattlePokedex = {
 		color: "Red",
 		eggGroups: ["Human-Like"],
 		spritenum: 1000,
+	},
+	seviper: {
+		inherit: true,
+		types: ["Poison", "Dragon"],
+		baseStats: {hp: 83, atk: 100, def: 70, spa: 100, spd: 70, spe: 95}
 	},
 	torterra: {
 		num: 389,
@@ -263,7 +278,7 @@ exports.BattlePokedex = {
 	samurott: {
 		num: 503,
 		species: "Samurott",
-		types: ["Water"],
+		types: ["Water", "Fighting"],
 		genderRatio: {M: 0.875, F: 0.125},
 		baseStats: {hp: 95, atk: 100, def: 85, spa: 108, spd: 70, spe: 70},
 		abilities: {0: "Torrent", H: "Contrary"},
@@ -315,6 +330,31 @@ exports.BattlePokedex = {
 		prevo: "panpour",
 		evoLevel: 1,
 		eggGroups: ["Field"],
+	},
+	chesnaught: {
+		inherit: true,
+		baseStats: {hp: 98, atk: 107, def: 122, spa: 64, spd: 80, spe: 64},
+		abilities: {0: "Overgrow", H: "Rough Skin"},
+	},
+	delphox: {
+		inherit: true,
+		baseStats: {hp: 75, atk: 114, def: 78, spa: 69, spd: 100, spe: 104},
+		abilities: {0: "Blaze", H: "Pure Power"},
+	},	
+	ribombee: {
+		inherit: true,
+		types: ["Bug", "Fairy", "caw"],
+		baseStats: {hp: 60, atk: 45, def: 50, spa: 115, spd: 60, spe: 124},
+		abilities: {0: "Magic Guard", 1: "Shield Dust", H: "Sweet Veil"},
+	},
+	decideueye: {
+		inherit: true,
+		types: ["Grass", "Ghost", "caw"],
+		baseStats: {hp: 78, atk: 127, def: 85, spa: 70, spd: 100, spe: 75},
+	},
+	incineroar: {
+		inherit: true,
+		baseStats: {hp: 95, atk: 125, def: 100, spa: 10, spd: 100, spe: 100},
 	},
 	pyukumuku: {
 		num: 771,
