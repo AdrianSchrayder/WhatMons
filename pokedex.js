@@ -18,7 +18,17 @@ exports.BattlePokedex = {
 		baseStats: {hp: 79, atk: 60, def: 105, spa:108, spd: 110, spe:78},
 		abilities: {0: "Torrent", H:"Mega Launcher"},
 	},
-	venomoth :{
+	pidgeot: {
+		inherit: true,
+		types: ["Flying"],
+		baseStats: {hp: 83, atk: 80, def: 80, spa: 145, spd: 80, spe: 121},
+	},
+	arbok: {
+		inherit: true,
+		types: ["Poison", "Dragon"],
+		baseStats: {hp: 90, atk: 125, def: 109, spa: 65, spd: 99, spe: 90},
+	},
+	venomoth: {
 		inherit: true,
 		types: ["Bug", "Poison", "caw"],
 		baseStats: {hp: 80, atk: 75, def: 70, spa: 100, spd: 85, spe: 100},
@@ -206,6 +216,11 @@ exports.BattlePokedex = {
 		types: ["Poison", "Dragon"],
 		baseStats: {hp: 83, atk: 100, def: 70, spa: 100, spd: 70, spe: 95}
 	},
+	zangoose: {
+		inherit: true,
+		baseStats: {hp: 73, atk: 120, def: 80, spa: 60, spd: 80, spe: 110},
+		abilities: {0: "Immunity", 1: "Tough Claws", H: "Toxic Boost"},
+	},
 	torterra: {
 		num: 389,
 		species: "Torterra",
@@ -331,6 +346,28 @@ exports.BattlePokedex = {
 		evoLevel: 1,
 		eggGroups: ["Field"],
 	},
+	heatmor: {
+		num: 631,
+		species: "Heatmor",
+		types: ["Fire", "Ground"],
+		baseStats: {hp: 85, atk: 40, def: 86, spa: 107, spd: 96, spe: 65},
+		abilities: {0: "Magma Armor", 1: "Flash Fire", H: "Drought"},
+		heightm: 1.4,
+		weightkg: 58,
+		color: "Red",
+		eggGroups: ["Field"],
+	},
+	durant: {
+		num: 632,
+		species: "Durant",
+		types: ["Bug", "Steel"],
+		baseStats: {hp: 58, atk: 109, def: 112, spa: 48, spd: 48, spe: 109},
+		abilities: {0: "Swarm", 1: "Hustle", H: "Heatproof"},
+		heightm: 0.3,
+		weightkg: 33,
+		color: "Gray",
+		eggGroups: ["Bug"],
+	},
 	chesnaught: {
 		inherit: true,
 		baseStats: {hp: 98, atk: 107, def: 122, spa: 64, spd: 80, spe: 64},
@@ -340,7 +377,11 @@ exports.BattlePokedex = {
 		inherit: true,
 		baseStats: {hp: 75, atk: 114, def: 78, spa: 69, spd: 100, spe: 104},
 		abilities: {0: "Blaze", H: "Pure Power"},
-	},	
+	},
+	talonflame: {
+		inherit: true,
+		baseStats: {hp: 78, atk: 101, def:71, spa: 101, spd: 69, spe: 126},
+	},
 	ribombee: {
 		inherit: true,
 		types: ["Bug", "Fairy", "caw"],
