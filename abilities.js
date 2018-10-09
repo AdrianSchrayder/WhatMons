@@ -71,9 +71,19 @@ exports.BattleAbilities = {
 		rating: 2.5,
 		num: 138,
 	},
+	"galewings": {
+		shortDesc: "Flying-type moves have their priority increased by 1.",
+		onModifyPriority: function (priority, pokemon, target, move) {
+			if (move && move.type === 'Flying') return priority + 1;
+		},
+		id: "galewings",
+		name: "Gale Wings",
+		rating: 3,
+		num: 177,
+	},
 	"hustle": {
-		desc: "This Pokemon's Attack is multiplied by 1.5 and the accuracy of its physical attacks is multiplied by 0.8.",
-		shortDesc: "This Pokemon's Attack is 1.5x and accuracy of its physical attacks is 0.8x.",
+		desc: "This Pokemon's Attack is multiplied by 1.5 and the accuracy of its physical attacks is multiplied by 0.9",
+		shortDesc: "This Pokemon's Attack is 1.5x and accuracy of its physical attacks is 0.9.",
 		// This should be applied directly to the stat as opposed to chaining witht he others
 		onModifyAtkPriority: 5,
 		onModifyAtk: function (atk) {
@@ -102,6 +112,28 @@ exports.BattleAbilities = {
 		name: "Insomnia",
 		rating: 2,
 		num: 15,
+	},
+	"magmaarmor": {
+		shortDesc: "This Pokemon cannot be frozen. Gaining this Ability while frozen cures it.",
+			onTryHitPriority: 1,
+		onTryHit: function (target, source, move) {
+			if (target !== source && move.type === 'Water') {
+				if (!this.boost({def: 1})) {
+					this.add('-immune', target, '[msg]', '[from] ability: Sap Sipper');
+				}
+				return null;
+			}
+		},
+		onAllyTryHitSide: function (target, source, move) {
+			if (target === this.effectData.target || target.side !== source.side) return;
+			if (move.type === 'Water') {
+				this.boost({def: 1}, this.effectData.target);
+			}
+		},
+		id: "magmaarmor",
+		name: "Magma Armor",
+		rating: 0.5,
+		num: 40,
 	},
 	"swarm": {
 		desc: "When this Pokemon has 1/3 or less of its maximum HP, rounded down, its attacking stat is multiplied by 1.5 while using a Bug-type attack.",
