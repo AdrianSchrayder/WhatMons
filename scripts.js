@@ -24,5 +24,6 @@ exports.BattleScripts = {
     this.modData('Learnsets', 'heatmor').learnset.earthquake = ['7M'];
     this.modData('Learnsets', 'heatmor').learnset.ancientpower = ['7M'];
     this.modData('Learnsets', 'heatmor').learnset.solarbeam = ['7M'];
+    this.modData('Learnsets', 'heatmor').learnset.stealthrock = ['7M'];
   },
 };
