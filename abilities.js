@@ -81,6 +81,24 @@ exports.BattleAbilities = {
 		rating: 3,
 		num: 177,
 	},
+	"heavymetal": {
+		shortDesc: "This Pokemon's weight is doubled.",
+		onModifyWeight: function (weight) {
+			return weight * 2;
+		},
+		onModifySpDPriority: 6,
+		onModifySpD: function (spd) {
+			return this.chainModify(1.5);
+		},
+		onModifyDefPriority: 6,
+		onModifyDef: function (def) {
+			return this.chainModify(1.5);
+		},
+		id: "heavymetal",
+		name: "Heavy Metal",
+		rating: 5,
+		num: 134,
+	},
 	"hustle": {
 		desc: "This Pokemon's Attack is multiplied by 1.5 and the accuracy of its physical attacks is multiplied by 0.9",
 		shortDesc: "This Pokemon's Attack is 1.5x and accuracy of its physical attacks is 0.9.",
@@ -189,6 +207,16 @@ exports.BattleAbilities = {
 		name: "Pure Power",
 		rating: 5,
 		num: 74,
+	},
+	"stall": {
+		shortDesc: "This Pokemon moves last among Pokemon using the same or greater priority moves.",
+			onSwitchOut: function (pokemon) {
+			pokemon.heal(pokemon.maxhp / 2);
+		},
+		id: "stall",
+		name: "Stall",
+		rating: 5,
+		num: 100,
 	},
 	"stamina": {
 		shortDesc: "This Pokemon's Defense is raised by 1 stage after it is damaged by a move.",
