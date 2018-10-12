@@ -208,6 +208,18 @@ exports.BattleAbilities = {
 		rating: 5,
 		num: 74,
 	},
+	"quickfeet": {
+		desc: "If this Pokemon has a major status condition, its Speed is multiplied by 1.5; the Speed drop from paralysis is ignored.",
+		shortDesc: "If this Pokemon is statused, its Speed is 1.5x; ignores Speed drop from paralysis.",
+		onModifySpePriority: 6,
+		onModifySpe: function (spe) {
+			return this.chainModify(1.5);
+		},
+		id: "quickfeet",
+		name: "Quick Feet",
+		rating: 5,
+		num: 95,
+	},
 	"stall": {
 		shortDesc: "This Pokemon moves last among Pokemon using the same or greater priority moves.",
 			onSwitchOut: function (pokemon) {
