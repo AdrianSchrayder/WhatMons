@@ -115,6 +115,96 @@ exports.BattleMovedex = {
 		zMovePower: 120,
 		contestType: "Tough",
 	},
+	"bubblebeam": {
+		num: 61,
+		accuracy: 100,
+		basePower: 85,
+		category: "Special",
+		desc: "Has a 10% chance to lower the target's Speed by 1 stage.",
+		shortDesc: "10% chance to lower the target's Speed by 1.",
+		id: "bubblebeam",
+		name: "Bubble Beam",
+		pp: 20,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		secondary: {
+			chance: 10,
+			boosts: {
+				spe: -1,
+			},
+		},
+		target: "normal",
+		type: "Water",
+		zMovePower: 120,
+		contestType: "Beautiful",
+	},
+	"disarmingvoice": {
+		num: 574,
+		accuracy: true,
+		basePower: 40,
+		category: "Special",
+		desc: "This move does not check accuracy.",
+		shortDesc: "This move does not check accuracy. Hits foes.",
+		id: "disarmingvoice",
+		name: "Disarming Voice",
+		pp: 15,
+		priority: 1,
+		flags: {protect: 1, mirror: 1, sound: 1, authentic: 1},
+		secondary: null,
+		target: "allAdjacentFoes",
+		type: "Fairy",
+		zMovePower: 100,
+		contestType: "Cute",
+	},
+	"dragonrush": {
+		num: 407,
+		accuracy: 100,
+		basePower: 40,
+		category: "Physical",
+		desc: "Has a 20% chance to flinch the target. Damage doubles and no accuracy check is done if the target has used Minimize while active.",
+		shortDesc: "20% chance to flinch the target.",
+		id: "dragonrush",
+		name: "Dragon Rush",
+		pp: 15,
+		priority: 1,
+		flags: {contact: 1, protect: 1, mirror: 1},
+		secondary: {
+			chance: 20,
+			volatileStatus: 'flinch',
+		},
+		target: "normal",
+		type: "Dragon",
+		zMovePower: 180,
+		contestType: "Tough",
+	},
+	"fairywind": {
+		num: 584,
+		accuracy: 100,
+		basePower: 60,
+		category: "Special",
+		shortDesc: "No additional effect.",
+		id: "fairywind",
+		name: "Fairy Wind",
+		pp: 5,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		secondary: {
+			chance: 10,
+			self: {
+				boosts: {
+					atk: 1,
+					def: 1,
+					spa: 1,
+					spd: 1,
+					spe: 1,
+				},
+			},
+		},
+		target: "normal",
+		type: "Fairy",
+		zMovePower: 100,
+		contestType: "Beautiful",
+	},
 	"fireblast": {
 		num: 126,
 		accuracy: 85,
@@ -213,6 +303,27 @@ exports.BattleMovedex = {
 		zMovePower: 140,
 		contestType: "Tough",
 	},
+	"flamewheel": {
+		num: 172,
+		accuracy: 100,
+		basePower: 40,
+		category: "Physical",
+		desc: "Has a 10% chance to burn the target.",
+		shortDesc: "10% chance to burn the target. Thaws user.",
+		id: "flamewheel",
+		name: "Flame Wheel",
+		pp: 25,
+		priority: 1,
+		flags: {contact: 1, protect: 1, mirror: 1, defrost: 1},
+		secondary: {
+			chance: 10,
+			status: 'brn',
+		},
+		target: "normal",
+		type: "Fire",
+		zMovePower: 120,
+		contestType: "Beautiful",
+	},
 	"frenzyplant": {
 		num: 338,
 		accuracy: 90,
@@ -233,6 +344,45 @@ exports.BattleMovedex = {
 		type: "Grass",
 		zMovePower: 250,
 		contestType: "Cool",
+	},
+	"gust": {
+		num: 16,
+		accuracy: 100,
+		basePower: 40,
+		category: "Special",
+		desc: "Power doubles if the target is using Bounce, Fly, or Sky Drop, or is under the effect of Sky Drop.",
+		shortDesc: "Power doubles during Bounce, Fly, and Sky Drop.",
+		id: "gust",
+		name: "Gust",
+		pp: 35,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, distance: 1},
+			onHit: function (target, source, move) {
+			/**@type {?boolean | number} */
+			let success = false;
+			if (!target.volatiles['substitute'] || move.infiltrates) success = this.boost({evasion: -1});
+			let removeTarget = ['reflect', 'lightscreen', 'auroraveil', 'safeguard', 'mist', 'spikes', 'toxicspikes', 'stealthrock', 'stickyweb'];
+			let removeAll = ['spikes', 'toxicspikes', 'stealthrock', 'stickyweb'];
+			for (const targetCondition of removeTarget) {
+				if (target.side.removeSideCondition(targetCondition)) {
+					if (!removeAll.includes(targetCondition)) continue;
+					this.add('-sideend', target.side, this.getEffect(targetCondition).name, '[from] move: Defog', '[of] ' + target);
+					success = true;
+				}
+			}
+			for (const sideCondition of removeAll) {
+				if (source.side.removeSideCondition(sideCondition)) {
+					this.add('-sideend', source.side, this.getEffect(sideCondition).name, '[from] move: Defog', '[of] ' + source);
+					success = true;
+				}
+			}
+			return success;
+		},
+		secondary: null,
+		target: "any",
+		type: "Flying",
+		zMovePower: 100,
+		contestType: "Clever",
 	},
 	"hydrocannon": {
 		num: 308,
@@ -356,6 +506,25 @@ exports.BattleMovedex = {
 		type: "Fire",
 		zMovePower: 180,
 		contestType: "Beautiful",
+	},
+	"spikecannon": {
+		num: 131,
+		accuracy: 100,
+		basePower: 25,
+		category: "Physical",
+		desc: "Hits two to five times. Has a 1/3 chance to hit two or three times, and a 1/6 chance to hit four or five times. If one of the hits breaks the target's substitute, it will take damage for the remaining hits. If the user has the Skill Link Ability, this move will always hit five times.",
+		shortDesc: "Hits 2-5 times in one turn.",
+		id: "spikecannon",
+		name: "Spike Cannon",
+		pp: 15,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		multihit: [3, 5],
+		secondary: null,
+		target: "normal",
+		type: "Steel",
+		zMovePower: 150,
+		contestType: "Cool",
 	},
 	"spikyshield": {
 		num: 596,
